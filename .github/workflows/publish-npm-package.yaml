@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           registry-url: "registry=https://npm.pkg.github.com"
-          scope: "@mazgi"
+
       - run: |
           cat package.json | jq '.name="@mazgi/express-middleware-redirector"' > package.gpr.json
           mv package.gpr.json package.json
