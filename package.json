@@ -1,5 +1,5 @@
 {
-  "name": "@mazgi/express-middleware-redirector",
+  "name": "express-middleware-redirector",
   "version": "0.0.1",
   "description": "An express middleware for redirect your website.",
   "main": "dist/index.js",
