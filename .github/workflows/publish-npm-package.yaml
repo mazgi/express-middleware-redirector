@@ -16,12 +16,14 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: npm install
       - run: npm test
-      - run: npm publish
+      - name: publish to npm
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: actions/setup-node@v1
         with:
-          registry-url: "https://npm.pkg.github.com"
-      - run: npm publish
+          registry-url: "registry=https://npm.pkg.github.com/mazgi"
+      - name: publish to github
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
