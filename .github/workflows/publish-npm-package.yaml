@@ -14,16 +14,17 @@ jobs:
         with:
           node-version: 12
           registry-url: "https://registry.npmjs.org"
+      - run: npm install --global can-npm-publish
       - run: npm install
       - run: npm test
       - name: publish to npm
-        run: npm publish
+        run: can-npm-publish --verbose && npm publish --access public || true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: actions/setup-node@v1
         with:
           registry-url: "registry=https://npm.pkg.github.com/mazgi"
       - name: publish to github
-        run: npm publish
+        run: can-npm-publish --verbose && npm publish --access public || true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
