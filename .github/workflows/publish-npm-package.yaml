@@ -16,6 +16,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: npm install --global can-npm-publish
       - run: npm install
+      - run: npm run build
       - run: npm test
       - name: publish to npm
         run: can-npm-publish --verbose && npm publish --access public || true
