@@ -1,3 +1,16 @@
-README.md
+# https://docs.npmjs.com/using-npm/developers.html#keeping-files-out-of-your-package
+bin/
+coverage/
+docker-compose.yml
+Dockerfile.d/
+.env
+.eslintrc.json
+.github/
+.gitignore
+.gitmodules
 jest.config.json
-test/
+node_modules/
+.npmignore
+__tests__/
+tsconfig.json
+webpack.config.js
