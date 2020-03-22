@@ -1,0 +1,3 @@
+[submodule "Dockerfile.d/dev"]
+	path = Dockerfile.d/dev
+	url = https://github.com/mazgi/dockerfile.node-webapp-development.git

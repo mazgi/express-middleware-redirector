@@ -1,0 +1,1 @@
+export { createRedirector } from 'createRedirector'
