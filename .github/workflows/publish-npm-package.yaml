@@ -31,7 +31,8 @@ jobs:
       - run: |
           cat package.json | jq '.publishConfig.registry="https://npm.pkg.github.com/"' > package.gpr.json
           mv package.gpr.json package.json
+      - run: cat package.json
       - name: publish to github
-        run: can-npm-publish --verbose && npm publish --access public || true
+        run: can-npm-publish --verbose && npm publish --access public || cat /home/runner/.npm/_logs/*.log
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
