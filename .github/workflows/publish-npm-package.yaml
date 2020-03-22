@@ -23,7 +23,14 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: actions/setup-node@v1
         with:
-          registry-url: "registry=https://npm.pkg.github.com/mazgi"
+          registry-url: "registry=https://npm.pkg.github.com"
+          scope: "@mazgi"
+      - run: |
+          cat package.json | jq '.name="@mazgi/express-middleware-redirector"' > package.gpr.json
+          mv package.gpr.json package.json
+      - run: |
+          cat package.json | jq '.publishConfig.registry="https://npm.pkg.github.com/"' > package.gpr.json
+          mv package.gpr.json package.json
       - name: publish to github
         run: can-npm-publish --verbose && npm publish --access public || true
         env:
