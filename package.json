@@ -4,6 +4,9 @@
   "description": "An express middleware for redirect your website.",
   "main": "dist/main.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
     "lint": "eslint \"src/**\"",

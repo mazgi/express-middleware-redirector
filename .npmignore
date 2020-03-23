@@ -13,4 +13,5 @@ node_modules/
 .npmignore
 __tests__/
 tsconfig.json
+src/
 webpack.config.js

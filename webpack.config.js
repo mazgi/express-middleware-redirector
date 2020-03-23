@@ -18,6 +18,9 @@ module.exports = {
       }
     ]
   },
+  output: {
+    libraryTarget: 'umd'
+  },
   resolve: {
     mainFields: ['main'],
     modules: ['node_modules', path.resolve(__dirname, 'src')],
