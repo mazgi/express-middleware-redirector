@@ -1,0 +1,16 @@
+{
+  "destination": {
+    "baseUrl": "http://brand-new.example.com",
+    "fallbackPath": "/news/we-have-moved"
+  },
+  "contentMappings": [
+    {
+      "fromPath": "/pages/about-us",
+      "toPath": "/about"
+    },
+    {
+      "fromPath": ["/pages/access", "/pages/office-location"],
+      "toPath": "/access"
+    }
+  ]
+}

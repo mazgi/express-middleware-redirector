@@ -1,0 +1,36 @@
+# This is a duckscript file.
+# https://github.com/sagiegurari/duckscript
+
+lan_ip_result = exec curl --fail -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip
+if equals ${lan_ip_result.code} 0
+   bind_ip_addr = set ${lan_ip_result.stdout}
+end
+
+if is_empty ${bind_ip_addr}
+  echo
+  echo Please input your IP address for binding the containers.
+  echo This IP address is the same as your LAN IP address in almost cases.
+  echo You can get it via `ip address show` command or `ifconfig` command.
+  echo Enter your value:
+  bind_ip_addr = read
+  if is_empty ${bind_ip_addr}
+    assert_error "Please retry and input your BIND_IP_ADDR"
+  end
+end
+
+external_ip_result = exec curl --fail -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip
+if equals ${external_ip_result.code} 0
+  public_ip_addr_or_fqdn = set ${external_ip_result.stdout}
+end
+
+if is_empty ${public_ip_addr_or_fqdn}
+  echo
+  echo (optional) Please input your IP address for publishing the apps on the containers.
+  echo That needed If you have another IP address for listening requests from the Internet.
+  echo For example, if your development environment is on an instance of any IaaS and using NAT or Load Balancer.
+  echo Enter your value or press the Enter key without any value:
+  public_ip_addr_or_fqdn = read
+  if is_empty ${public_ip_addr_or_fqdn}
+    public_ip_addr_or_fqdn = set ${bind_ip_addr}
+  end
+end

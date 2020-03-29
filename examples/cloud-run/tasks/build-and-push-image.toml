@@ -1,0 +1,48 @@
+[config]
+skip_core_tasks = true
+min_version = "0.29.0"
+
+[env]
+DOCKER_BUILDKIT = "1"
+
+[tasks.prepare]
+cwd = "${CARGO_MAKE_CURRENT_TASK_INITIAL_MAKEFILE_DIRECTORY}/../"
+script = [
+'''
+mkdir -p tmp
+'''
+]
+
+[tasks.redirector]
+alias="build-and-push-redirector"
+
+[tasks.build-and-push-redirector]
+dependencies = [
+  "prepare"
+]
+env_files = [
+  ".env"
+]
+script = [
+'''
+export repository_name="gcr.io/${CLOUDSDK_CORE_PROJECT}/redirector"
+export tag=$(date +%m%d-%H%M%S)
+
+rm -rf Dockerfile.d/app/rootfs/
+
+mkdir -p Dockerfile.d/app/rootfs/data/config
+rsync --archive --verbose config/app Dockerfile.d/app/rootfs/data/config/
+
+mkdir -p Dockerfile.d/app/rootfs/workspace/
+rsync --archive --verbose src package.json package-lock.json tsconfig.json webpack.config.js Dockerfile.d/app/rootfs/workspace/
+
+echo ${repository_name}:${tag} > tmp/docker-image-tag.redirector.txt
+docker build --no-cache --quiet --tag $(cat tmp/docker-image-tag.redirector.txt) Dockerfile.d/app
+docker-compose run provisioning docker push $(cat tmp/docker-image-tag.redirector.txt)
+'''
+]
+
+[tasks.default]
+dependencies = [
+  "build-and-push-redirector"
+]

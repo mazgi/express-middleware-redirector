@@ -1,0 +1,31 @@
+{
+  "name": "app",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "create_domain": "serverless create_domain",
+    "delete_domain": "serverless delete_domain",
+    "deploy": "serverless deploy",
+    "remove": "serverless remove",
+    "invoke:local": "serverless invoke local --function redirector"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-middleware-redirector": "0.0.4",
+    "serverless-http": "^2.3.2",
+    "source-map-support": "^0.5.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.17",
+    "@types/express": "^4.17.3",
+    "@types/node": "^10.12.18",
+    "fork-ts-checker-webpack-plugin": "^3.0.1",
+    "serverless": "^1.67.0",
+    "serverless-domain-manager": "^3.3.1",
+    "serverless-webpack": "^5.2.0",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

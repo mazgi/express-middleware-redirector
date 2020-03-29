@@ -1,0 +1,69 @@
+[tasks.check-op-cli]
+dependencies = [
+  "prepare"
+]
+condition = { files_not_exist = ["${CARGO_MAKE_WORKING_DIRECTORY}/config/credentials/google-cloud-keyfile.json"] }
+script_runner = "@duckscript"
+script = [
+'''
+op_stdout = exec op --version
+op_exit_code = set ${op_stdout.code}
+op_exists = equals ${op_exit_code} 0
+if ${op_exists}
+  set_env CARGO_MAKE_OP_CLI_FOUND true
+end
+'''
+]
+
+[tasks.exit-with-message-to-place-google-cloud-keyfile-via-manual]
+dependencies = [
+  "prepare"
+]
+script_runner = "@duckscript"
+script = [
+'''
+assert_error "Please place 'config/credentials/google-cloud-keyfile.json' first."
+'''
+]
+
+[tasks.get-op-document-name-for-google-cloud-keyfile]
+dependencies = [
+  "prepare"
+]
+script_runner = "@duckscript"
+script = [
+'''
+echo
+echo Please input Google Cloud Keyfile name on 1Password.
+echo Enter your value:
+op_document_name_google_cloud_keyfile = read
+if is_empty ${op_document_name_google_cloud_keyfile}
+  assert_error "Please retry and input Google Cloud Keyfile name on 1Password"
+end
+set_env CARGO_MAKE_OP_DOCUMENT_NAME_GOOGLE_CLOUD_KEYFILE ${op_document_name_google_cloud_keyfile}
+'''
+]
+
+[tasks.place-google-cloud-keyfile-via-op-cli]
+dependencies = [
+  "prepare",
+  "get-op-document-name-for-google-cloud-keyfile"
+]
+script_runner = "bash"
+script = [
+'''
+eval $(op signin my)
+op get document ${CARGO_MAKE_OP_DOCUMENT_NAME_GOOGLE_CLOUD_KEYFILE} > config/credentials/google-cloud-keyfile.json
+'''
+]
+
+
+[tasks.place-google-cloud-keyfile]
+dependencies = [
+  "prepare",
+  "check-op-cli"
+]
+run_task = [
+    { name = "place-google-cloud-keyfile-via-op-cli", condition = { env_true = ["CARGO_MAKE_OP_CLI_FOUND"] } },
+    { name = "exit-with-message-to-place-google-cloud-keyfile-via-manual", condition = { env_false = ["CARGO_MAKE_OP_CLI_FOUND"] } },
+]

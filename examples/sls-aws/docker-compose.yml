@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      args:
+        UID: ${UID:-0}
+        GID: ${GID:-0}
+      context: Dockerfile.d/app.development
+    command:
+      - bash
+      - -c
+      - |
+        npm install
+        cd prepare && npm install
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_REGION=us-east-1
+      - BASE_DOMAIN_NAME
+    user: "${UID:-0}:${GID:-0}"
+    volumes:
+      - .:/workspace
+      - ./config/app:/data/config/app:ro
+    working_dir: /workspace
