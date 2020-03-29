@@ -18,14 +18,18 @@ services:
       - "${BIND_IP_ADDR:-127.0.0.1}:4000:4000"
     user: "${UID:-0}:${GID:-0}"
     volumes:
-      - provisioning-home:/root # for macOS
-      - provisioning-home:/home/developer
-      - provisioning-home:/home/node
+      - provisioning-root:/root # for macOS
+      - provisioning-home-developer:/home/developer
+      - provisioning-home-node:/home/node
       - ~/.ssh:/root/.ssh:ro # for macOS
       - ~/.ssh:/home/developer/.ssh:ro
       - ~/.ssh:/home/node/.ssh:ro
       - .:/workspace
     working_dir: /workspace
 volumes:
-  provisioning-home:
+  provisioning-root:
+    driver: local
+  provisioning-home-developer:
+    driver: local
+  provisioning-home-node:
     driver: local
