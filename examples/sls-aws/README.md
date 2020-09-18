@@ -2,6 +2,8 @@
 
 ## Set up
 
+Create `.env` file like below.
+
 ```
 UID=1000 # Your UID
 GID=100 # Your GID

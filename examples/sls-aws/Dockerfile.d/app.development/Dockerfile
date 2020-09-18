@@ -14,6 +14,7 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen\
   && locale-gen\
   && apt-get install --assume-yes sudo dnsutils netcat git tmux zsh jq groff less\
+  && npm install --global npm-check-updates\
   && curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip\
   && unzip -q -d /tmp/ /tmp/awscliv2.zip\
   && /tmp/aws/install\
