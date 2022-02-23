@@ -10,7 +10,10 @@ services:
       - bash
       - -c
       - |
+        npm-check-updates --upgrade
         npm install
+        npm audit fix
+        sort-package-json
         npm run test:coverage -- --watch
     environment:
       - PORT=4000
