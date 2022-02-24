@@ -1,4 +1,4 @@
-FROM google/cloud-sdk:310.0.0
+FROM gcr.io/google.com/cloudsdktool/cloud-sdk:latest
 
 # Set in non-interactive mode.
 ENV DEBIAN_FRONTEND=noninteractive

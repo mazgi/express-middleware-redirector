@@ -11,7 +11,10 @@ services:
       - bash
       - -c
       - |
+        npm-check-updates --upgrade
         npm install
+        npm audit fix
+        sort-package-json
         npm run dev
     environment:
       - PORT=4000

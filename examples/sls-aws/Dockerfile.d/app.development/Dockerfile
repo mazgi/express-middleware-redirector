@@ -10,14 +10,25 @@ ENV UID=${UID:-0}
 
 RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-recommends\
   && apt-get update\
+  # 
+  # Set up locales
   && apt-get install --assume-yes locales procps dialog\
   && echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen\
   && locale-gen\
+  #
+  # Install basic packages
   && apt-get install --assume-yes sudo dnsutils netcat git tmux zsh jq groff less\
-  && npm install --global npm-check-updates\
+  # 
+  # Install development packages
+  && npm install --global\
+  npm-check-updates\
+  sort-package-json\
+  # 
   && curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip\
   && unzip -q -d /tmp/ /tmp/awscliv2.zip\
   && /tmp/aws/install\
+  # 
+  # Create a user for development
   && addgroup --gid ${GID} developer || true\
   && adduser --disabled-password --uid ${UID} --gecos '' --gid ${GID} developer || true\
   # It will be duplicate UID or GID with "node" user when your UID==1000 or GID==100.

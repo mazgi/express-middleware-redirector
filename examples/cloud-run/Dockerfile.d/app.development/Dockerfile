@@ -25,7 +25,9 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && apt-get install --assume-yes default-mysql-client redis-tools\
   # 
   # Install development packages
-  && npm install --global npm-check-updates\
+  && npm install --global\
+  npm-check-updates\
+  sort-package-json\
   # 
   # Create a user for development
   && addgroup --gid ${GID} developer || true\

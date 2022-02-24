@@ -6,26 +6,26 @@
     "create_domain": "serverless create_domain",
     "delete_domain": "serverless delete_domain",
     "deploy": "serverless deploy",
-    "remove": "serverless remove",
-    "invoke:local": "serverless invoke local --function redirector"
+    "invoke:local": "serverless invoke local --function redirector",
+    "remove": "serverless remove"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "express-middleware-redirector": "0.0.4",
-    "serverless-http": "^2.6.0",
-    "source-map-support": "^0.5.19"
+    "express": "^4.17.3",
+    "express-middleware-redirector": "2020.9.0",
+    "serverless-http": "^2.7.0",
+    "source-map-support": "^0.5.21"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.62",
-    "@types/express": "^4.17.8",
-    "@types/node": "^14.11.1",
-    "fork-ts-checker-webpack-plugin": "^5.2.0",
-    "serverless": "^2.1.1",
-    "serverless-domain-manager": "^4.2.3",
-    "serverless-webpack": "^5.3.5",
-    "ts-loader": "^8.0.3",
-    "typescript": "^4.0.2",
-    "webpack": "^4.44.2",
-    "webpack-node-externals": "^2.5.2"
+    "@types/aws-lambda": "^8.10.92",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.21",
+    "fork-ts-checker-webpack-plugin": "^7.2.1",
+    "serverless": "^3.3.0",
+    "serverless-domain-manager": "^6.0.2",
+    "serverless-webpack": "^5.6.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.69.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }
