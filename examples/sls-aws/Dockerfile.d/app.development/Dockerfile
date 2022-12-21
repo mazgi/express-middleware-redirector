@@ -1,4 +1,4 @@
-FROM node:12 as base
+FROM node:18 as base
 
 # Set in non-interactive mode.
 ENV DEBIAN_FRONTEND=noninteractive
