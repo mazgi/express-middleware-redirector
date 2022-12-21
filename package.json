@@ -1,6 +1,6 @@
 {
   "name": "express-middleware-redirector",
-  "version": "2020.9.0",
+  "version": "2022.12.0",
   "description": "An express middleware for redirect your website.",
   "keywords": [
     "express",
