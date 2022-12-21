@@ -1,5 +1,7 @@
 # express-middleware-redirector
 
+[![test-all](https://github.com/mazgi/express-middleware-redirector/actions/workflows/test-all.yml/badge.svg)](https://github.com/mazgi/express-middleware-redirector/actions/workflows/test-all.yml)
+
 ## How to configure
 
 **minimum**
